@@ -23,7 +23,8 @@ describe('<StudentList />', function() {
 	});
 
 	it('calculateSummaryData function to be called', () => {
-		expect(enzymeWrapper.instance().calculateSummaryData()).toBeUndefined();
+		const studentList = [ { studentName: 'abc', score: '12' } ];
+		expect(enzymeWrapper.instance().calculateSummaryData(studentList)).toBeUndefined();
 	});
 
 	it('onDeleteClick function to be called', () => {
@@ -33,12 +34,13 @@ describe('<StudentList />', function() {
 		enzymeWrapper.setState({ studentsList: studentList });
 		expect(enzymeWrapper.find('.container-fluid').length).toBe(2);
 		//expect(enzymeWrapper.find('.mt-4').length).toBe(1);
-		enzymeWrapper.instance().calculateSummaryData();
+		enzymeWrapper.instance().calculateSummaryData(studentList);
 	});
 	it('onChangeHandler function to be called', () => {
 		const e = { charCode: 5 };
+		const studentList = [ { studentName: 'abc', score: '12' } ];
 		expect(enzymeWrapper.instance().handleKeyPress(e)).toBeUndefined();
-		enzymeWrapper.instance().calculateSummaryData(e);
+		enzymeWrapper.instance().calculateSummaryData(studentList);
 	});
 	// it('Simulate the click on button', () => {
 	// 	const event = { preventDefault: () => {} };
