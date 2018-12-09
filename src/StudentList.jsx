@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import './StudentList.css';
 import StudentItem from './StudentItem';
-import ErrorMessage from './ErrorMessage';
+// import ErrorMessage from './ErrorMessage';
 import { inputDataErrorMessageUtil, calculateSummaryDataUtil } from './Utilities';
 import ClassSummary from './ClassSummary';
 import TableHeader from './TableHeader';
@@ -46,11 +46,6 @@ export default class StudentList extends Component {
 			this.score = value === '' ? '' : value;
 		}
 	};
-
-	// inputDataErrorMessage = (name, score) => {
-	// 	this.ErrorMessage = inputDataErrorMessageUtil(name, score);
-	// };
-
 	addStudent = (e, studentNameField, scoreField) => {
 		var regex = /^([a-zA-Z' ]){0,255}$/;
 		if (
@@ -109,14 +104,14 @@ export default class StudentList extends Component {
 		this.calculateSummaryData(studentsList);
 	};
 	/* Function to add student on enterkey stroke*/
-	handleKeyPress(e) {
+	handleKeyPress(e, studentNameField, scoreField) {
 		if (e.charCode === 13) {
 			if (this.name === '' || this.score === '') {
 				this.setState({
 					isInvalid: 1
 				});
 			}
-			this.addStudent(e);
+			this.addStudent(e, studentNameField, scoreField);
 		}
 	}
 	render() {

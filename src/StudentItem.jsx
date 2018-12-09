@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import './StudentList.css';
 import { inputDataErrorMessageUtil } from './Utilities';
 import TableRowView from './TableRowView';
-import TableRowEdit from './TableRowEdit';
 import InputForm from './InputForm';
 
 export default class StudentItem extends Component {
@@ -26,11 +25,10 @@ export default class StudentItem extends Component {
 			isEditClicked: true
 		});
 	};
-	/*Check validation and pass data to parent to edit the state */
 	updateClick = (e, name, score) => {
 		var regex = /^([a-zA-Z' ]){0,255}$/;
 		if (name === '' || !regex.test(name) || score === '' || score < 0 || score > 100 || isNaN(score)) {
-			this.inputDataErrorMessage(name, score);
+			this.ErrorMessage = inputDataErrorMessageUtil(name, score);
 			this.setState({
 				isInvalid: 1
 			});
@@ -66,15 +64,30 @@ export default class StudentItem extends Component {
 		}
 	};
 
-	inputDataErrorMessage = (name, score) => {
-		this.ErrorMessage = inputDataErrorMessageUtil(name, score);
-	};
 	onChangeHandler = (e) => {
 		let value = e.target.value.trim();
 		if (e.target.id === 'sname') {
 			this.name = value === '' ? '' : value;
 		} else {
 			this.score = value === '' ? '' : value;
+		}
+	};
+	handleKeyPress = (e) => {
+		if (e.charCode === 13) {
+			var regex = /^([a-zA-Z' ]){0,255}$/;
+			if (
+				this.name === '' ||
+				!regex.test(this.name) ||
+				this.score === '' ||
+				this.score < 0 ||
+				this.score > 100 ||
+				isNaN(this.score)
+			) {
+				this.setState({
+					isInvalid: 1
+				});
+			}
+			this.updateClick(e, this.name, this.score);
 		}
 	};
 	render() {
@@ -90,13 +103,13 @@ export default class StudentItem extends Component {
 			onChangeHandler: this.onChangeHandler,
 			updateClick: this.updateClick,
 			message: this.ErrorMessage,
-			isInvalid: this.state.isInvalid
+			isInvalid: this.state.isInvalid,
+			handleKeyPress: this.handleKeyPress
 		};
 		if (!this.state.isEditClicked) {
 			divElement = <TableRowView data={rowViewProps} />;
 		}
 		if (this.state.isEditClicked) {
-			// divElement = <TableRowEdit data={rowEditProps} />;
 			divElement = <InputForm data={rowEditProps} />;
 		}
 		return <div>{divElement}</div>;

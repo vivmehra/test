@@ -3,15 +3,15 @@ import './StudentList.css';
 import ErrorMessage from './ErrorMessage';
 
 export default class InputForm extends PureComponent {
-	constructor(props) {
-		super(props);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// }
 	render() {
 		return (
 			<div>
 				<form className="form-inline p-3" id="addStudent">
 					<div className="form-group mb-2">
-						{this.props.data.formType == 'add' ? (
+						{this.props.data.formType === 'add' ? (
 							<label htmlFor="sname" className="m-2">
 								Student Name <sup className="mandatory">*</sup>
 							</label>
@@ -22,7 +22,8 @@ export default class InputForm extends PureComponent {
 							className="form-control"
 							placeholder="Enter Student Name"
 							onChange={(e) => this.props.data.onChangeHandler(e)}
-							// onKeyPress={(e) => this.props.data.handleKeyPress(e)}
+							onKeyPress={(e) =>
+								this.props.data.handleKeyPress(e, this.studentNameField, this.scoreField)}
 							ref={(input) => {
 								this.studentNameField = input;
 							}}
@@ -31,7 +32,7 @@ export default class InputForm extends PureComponent {
 						/>
 					</div>
 					<div className="form-group mx-sm-3 mb-2">
-						{this.props.data.formType == 'add' ? (
+						{this.props.data.formType === 'add' ? (
 							<label htmlFor="score" className="m-2">
 								Marks Obtained <sup className="mandatory">*</sup>
 							</label>
@@ -44,7 +45,8 @@ export default class InputForm extends PureComponent {
 							id="score"
 							placeholder="Score"
 							onChange={(e) => this.props.data.onChangeHandler(e)}
-							// onKeyPress={(e) => this.props.data.handleKeyPress(e)}
+							onKeyPress={(e) =>
+								this.props.data.handleKeyPress(e, this.studentNameField, this.scoreField)}
 							ref={(input) => {
 								this.scoreField = input;
 							}}
@@ -52,7 +54,7 @@ export default class InputForm extends PureComponent {
 							defaultValue={this.props.data.studentData ? this.props.data.studentData.score : ''}
 						/>
 					</div>
-					{this.props.data.formType == 'add' ? (
+					{this.props.data.formType === 'add' ? (
 						<button
 							type="button"
 							onClick={(e) => this.props.data.addStudent(e, this.studentNameField, this.scoreField)}
