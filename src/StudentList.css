@@ -1,0 +1,15 @@
+.mandatory {
+	color: red;
+}
+
+.dividetds td {
+	width: 38% !important;
+	word-break: break-all;
+}
+#main-container {
+	width: 80% !important;
+}
+.emptyLabel {
+	display: inline-block;
+	margin-right: 6.25em !important;
+}
