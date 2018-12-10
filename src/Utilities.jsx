@@ -2,7 +2,7 @@ export const inputDataErrorMessageUtil = (name, score) => {
 	let ErrorMessage = '';
 	var regex = /^([a-zA-Z' ]){0,255}$/;
 	if (!regex.test(name)) {
-		ErrorMessage = 'Name should not contain numbers and special characters';
+		ErrorMessage = 'Name should not contain numbers and special characters (except single quote)';
 		return ErrorMessage;
 	} else if (name === '' && score === '') {
 		ErrorMessage = 'Please enter valid Student Name and Score';
