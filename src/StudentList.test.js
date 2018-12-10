@@ -42,9 +42,4 @@ describe('<StudentList />', function() {
 		expect(enzymeWrapper.instance().handleKeyPress(e)).toBeUndefined();
 		enzymeWrapper.instance().calculateSummaryData(studentList);
 	});
-	// it('Simulate the click on button', () => {
-	// 	const event = { preventDefault: () => {} };
-	// 	enzymeWrapper.find('.btn').simulate('click');
-	// 	enzymeWrapper.instance().addStudent(event);
-	// });
 });
